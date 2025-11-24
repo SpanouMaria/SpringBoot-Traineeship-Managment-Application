@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Application Details</title>
+    <style>
+        body { background: #f7f7f7; font-family: 'Segoe UI', Arial, sans-serif; }
+        .container { max-width: 600px; margin: 40px auto; background: white; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 30px; }
+        h2 { color: #2b364b; margin-bottom: 24px; }
+        .section { margin-bottom: 22px; }
+        .label { font-weight: bold; color: #3a86ff; }
+        .value { margin-left: 8px; color: #222; }
+        ul { margin: 5px 0 10px 22px; }
+        .empty { color: #aaa; font-style: italic; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Application Details</h2>
+
+    <div class="section">
+        <div>
+            <span class="label">Student:</span>
+            <span class="value" th:text="${app.student != null ? app.student.studentName : '-'}"></span>
+        </div>
+        <div>
+            <span class="label">Student ID:</span>
+            <span class="value" th:text="${app.student != null && app.student.AM != null ? app.student.AM : '-'}"></span>
+        </div>
+        <div>
+            <span class="label">Preferred Location:</span>
+            <span class="value" th:text="${app.student != null && app.student.preferredLocation != null ? app.student.preferredLocation : '-'}"></span>
+        </div>
+    </div>
+
+    <div class="section">
+        <span class="label">Interests:</span>
+        <ul th:if="${app.student != null && app.student.interests != null && !#lists.isEmpty(app.student.interests)}">
+            <li th:each="interest : ${app.student.interests}" th:text="${interest}"></li>
+        </ul>
+        <span th:if="${app.student == null || app.student.interests == null || #lists.isEmpty(app.student.interests)}" class="empty">-</span>
+
+        <span class="label" style="display:block; margin-top:10px;">Skills:</span>
+        <ul th:if="${app.student != null && app.student.skills != null && !#lists.isEmpty(app.student.skills)}">
+            <li th:each="skill : ${app.student.skills}" th:text="${skill}"></li>
+        </ul>
+        <span th:if="${app.student == null || app.student.skills == null || #lists.isEmpty(app.student.skills)}" class="empty">-</span>
+    </div>
+
+    <div class="section">
+        <div>
+            <span class="label">Status:</span>
+            <span class="value" th:text="${app.status != null ? app.status : '-'}">APPROVED</span>
+        </div>
+        <div>
+            <span class="label">Position:</span>
+            <span class="value" th:text="${app.position != null && app.position.title != null ? app.position.title : '-'}">Position Title</span>
+        </div>
+        <div>
+            <span class="label">Evaluation:</span>
+            <span class="value" th:text="${app.position != null && app.position.evaluations != null && !#lists.isEmpty(app.position.evaluations) ? 'Done' : 'Not Done'}"></span>
+        </div>
+    </div>
+
+    <a href="/traineeship-committee/view-applications">Back</a>
+</div>
+</body>
+</html>

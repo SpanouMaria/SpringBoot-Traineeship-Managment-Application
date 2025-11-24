@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Professor Portal</title>
+    <style>
+        body {
+            background: #f7f7f7;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+            padding: 40px 30px 30px 30px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 30px;
+            color: #2b364b;
+            font-size: 2em;
+        }
+        a {
+            display: block;
+            margin: 16px 0;
+            color: #3a86ff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.13em;
+            transition: color 0.18s;
+        }
+        a:hover {
+            color: #26499d;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 th:if="${professor != null}">Welcome <span th:text="${professor.professorName}">Professor</span>!</h2>
+    <h2 th:if="${professor == null}">Welcome Professor!</h2>
+    <a href="/professors/my-positions">My Supervised Positions</a>
+	<a th:href="@{/professors/evaluate/{id}(id=${position.id})}" th:if="${position != null}">Evaluate Traineeship</a>
+	<form th:action="@{/logout}" method="post" style="margin-top: 25px;">
+	        <button type="submit" style="background: #e44e4e; color: white; border: none; border-radius: 5px; padding: 8px 16px; font-weight: bold; cursor: pointer;">
+	            Log-out
+	        </button>
+	    </form>
+</div>
+</body>
+</html>

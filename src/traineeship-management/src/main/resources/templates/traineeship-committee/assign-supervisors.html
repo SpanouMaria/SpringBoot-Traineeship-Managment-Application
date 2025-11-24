@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assign Supervisors</title>
+    <style>
+        body { background: #f7f7f7; font-family: 'Segoe UI', Arial, sans-serif; }
+        .container { max-width: 500px; margin: 60px auto; background: white; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 40px 30px; text-align: center; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { padding: 10px; border-bottom: 1px solid #eee; }
+        th { background: #f0f0f0; }
+        a.assign-link { color: #3a86ff; text-decoration: none; font-weight: 500; }
+        a.assign-link:hover { color: #26499d; }
+        .back-link { margin-top: 20px; display: block; color: #3a86ff; text-decoration: none; font-weight: 500; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Assign Supervisors to Positions</h2>
+    <table>
+        <tr>
+            <th>Position</th>
+            <th>Student</th>
+            <th>Current Supervisor</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="pos : ${positions}">
+            <td th:text="${pos.title}">Position Title</td>
+            <td th:text="${pos.assignedStudent != null ? pos.assignedStudent.studentName : '—'}">Student</td>
+            <td th:text="${pos.supervisor != null ? pos.supervisor.professorName : '—'}">Supervisor</td>
+            <td>
+                <a th:href="@{'/traineeship-committee/assign-supervisor/' + ${pos.id}}" class="assign-link">Assign</a>
+            </td>
+        </tr>
+    </table>
+    <a href="/traineeship-committee/portal-home" class="back-link">Back</a>
+</div>
+</body>
+</html>

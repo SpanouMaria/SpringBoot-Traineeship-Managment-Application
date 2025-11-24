@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My applications</title>
+    <style>
+        body {
+            background: #f7f7f7;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+            padding: 30px;
+        }
+        h2 {
+            color: #2b364b;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+        th, td {
+            border: 1px solid #e2e2e2;
+            padding: 12px 8px;
+            text-align: left;
+        }
+        th {
+            background: #f0f4fa;
+            font-weight: 600;
+        }
+        a {
+            color: #3a86ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            color: #26499d;
+        }
+        button {
+            background: #3a86ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #26499d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>My applications</h2>
+        <table>
+            <tr>
+                <th>Position</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="app : ${applications}">
+                <td th:text="${app.position.title}">Title</td>
+                <td th:text="${app.status}">State</td>
+                <td>
+                    <form th:action="@{|/students/cancel/${app.id}|}" method="post" th:if="${app.status == 'PENDING'}">
+                        <button type="submit">Cancel</button>
+                    </form>
+                    <span th:if="${app.status != 'PENDING'}">Cannot be cancelled</span>
+                </td>
+            </tr>
+        </table>
+        <a href="/students/portal-home">Back</a>
+    </div>
+</body>
+</html>
+

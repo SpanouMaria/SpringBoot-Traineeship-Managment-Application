@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assign Supervisor</title>
+    <style>
+        body { background: #f7f7f7; font-family: 'Segoe UI', Arial, sans-serif; }
+        .container { max-width: 450px; margin: 60px auto; background: white; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 40px 30px; text-align: center; }
+        select, button { font-size: 1.13em; margin: 14px 0; padding: 6px; }
+        .back-link { margin-top: 20px; display: block; color: #3a86ff; text-decoration: none; font-weight: 500; }
+        .back-link:hover { color: #26499d; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 th:text="'Assign Supervisor to: ' + ${position.title}">Assign Supervisor</h2>
+
+    <div th:if="${professors.size() == 0}">
+        <p>No professors found! Add some supervisors first.</p>
+    </div>
+    <div th:unless="${professors.size() == 0}">
+        <form th:action="@{/traineeship-committee/assign-supervisor}" method="post">
+            <input type="hidden" name="positionId" th:value="${position.id}" />
+            <label for="professorId">Choose Supervisor:</label>
+            <select name="professorId" id="professorId" required>
+                <option th:each="prof : ${professors}"
+                        th:value="${prof.username}"
+                        th:text="${prof.professorName}">Professor Name</option>
+            </select>
+            <br>
+            <button type="submit">Assign</button>
+        </form>
+    </div>
+
+    <a href="/traineeship-committee/assign-supervisors" class="back-link">Cancel</a>
+</div>
+</body>
+</html>

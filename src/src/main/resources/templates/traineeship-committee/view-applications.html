@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Applications</title>
+	<style>
+		        body {
+		            background: #f7f7f7;
+		            font-family: 'Segoe UI', Arial, sans-serif;
+		            margin: 0;
+		            padding: 0;
+		        }
+		        .container {
+		            max-width: 400px;
+		            margin: 60px auto;
+		            background: white;
+		            border-radius: 10px;
+		            box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+		            padding: 40px 30px 30px 30px;
+		            text-align: center;
+		        }
+		        h2 {
+		            margin-bottom: 30px;
+		            color: #2b364b;
+		            font-size: 2em;
+		        }
+		        a {
+		            display: block;
+		            margin: 16px 0;
+		            color: #3a86ff;
+		            text-decoration: none;
+		            font-weight: 500;
+		            font-size: 1.13em;
+		            transition: color 0.18s;
+		        }
+		        a:hover {
+		            color: #26499d;
+		        }
+		    </style>
+</head>
+<body>
+<div class="container">
+    <h2>All Applications</h2>
+    <table>
+        <tr>
+            <th>Application ID</th>
+            <th>Student</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="app : ${applications}">
+           
+			<td th:text="${app.id}">Application ID</td>
+            <td th:text="${app.student.studentName}">Student Name</td>
+            <td th:text="${app.position.title}">Position Title</td>
+            <td th:text="${app.status}">Status</td>
+            <td>
+				<a th:href="@{/traineeship-committee/view-application/{id}(id=${app.id})}">View</a>
+
+
+            </td>
+        </tr>
+    </table>
+    <a href="/traineeship-committee/portal-home">Back</a>
+</div>
+</body>
+</html>

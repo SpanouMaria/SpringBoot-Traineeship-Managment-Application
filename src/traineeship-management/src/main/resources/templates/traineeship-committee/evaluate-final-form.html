@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Finalize Traineeship Evaluation</title>
+    <style>
+        body { background: #f7f7f7; font-family: 'Segoe UI', Arial, sans-serif; }
+        .container { max-width: 600px; margin: 40px auto; background: white; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 30px; }
+        h2 { color: #2b364b; margin-bottom: 24px; }
+        .row { margin-bottom: 12px; }
+        .label { font-weight: bold; }
+        table { width: 100%; margin-top: 18px; border-collapse: collapse; }
+        th, td { padding: 7px 8px; border-bottom: 1px solid #f0f0f0; text-align: left; }
+        th { background: #f5f7fa; }
+        select, textarea { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #eee; margin-bottom: 10px; }
+        button { background: #3a86ff; color: white; border: none; border-radius: 4px; padding: 9px 20px; cursor: pointer; font-weight: 600;}
+        button:hover { background: #2b364b; }
+        .back-link { display: block; margin-top: 16px; color: #3a86ff; text-decoration: none; }
+        .back-link:hover { color: #26499d; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Finalize Traineeship Evaluation</h2>
+    <div class="row">
+        <span class="label">Student:</span>
+        <span th:text="${position.assignedStudent != null ? position.assignedStudent.studentName : '-'}">Student Name</span><br>
+        <span class="label">Student ID:</span>
+        <span th:text="${position.assignedStudent != null ? position.assignedStudent.AM : '-'}">Student AM</span><br>
+        <span class="label">Position:</span>
+        <span th:text="${position.title}">Position</span><br>
+        <span class="label">Company:</span>
+        <span th:text="${position.company != null ? position.company.companyName : '-'}">Company</span>
+    </div>
+
+    <h3>Professor Evaluation</h3>
+    <table>
+        <tr>
+            <th>Motivation</th>
+            <th>Effectiveness</th>
+            <th>Efficiency</th>
+        </tr>
+		<tr th:if="${professorEval != null}">
+		    <td th:text="${professorEval.motivation}"></td>
+		    <td th:text="${professorEval.effectiveness}"></td>
+		    <td th:text="${professorEval.efficiency}"></td>
+		</tr>
+		<tr th:if="${professorEval == null}">
+		    <td colspan="3">No professor evaluation yet</td>
+		</tr>
+    </table>
+	
+	<h3>Company Evaluation</h3>
+	    <table>
+	        <tr>
+	            <th>Motivation</th>
+	            <th>Skills</th>
+	            <th>Cooperation</th>
+	        </tr>
+			<tr th:if="${companyEval != null}">
+			    <td th:text="${companyEval.motivation}"></td>
+			    <td th:text="${companyEval.skills}"></td>
+			    <td th:text="${companyEval.cooperation}"></td>
+			</tr>
+			<tr th:if="${companyEval == null}">
+			    <td colspan="3">No company evaluation yet</td>
+			</tr>
+		</table>
+    <form th:action="@{/traineeship-committee/evaluate-final/{id}(id=${position.id})}" method="post">
+        <label class="label" for="passFailGrade">Final Grade (Pass/Fail):</label>
+        <select name="passFailGrade" id="passFailGrade" required>
+            <option value="">Select...</option>
+            <option value="PASS">Pass</option>
+            <option value="FAIL">Fail</option>
+        </select>
+        <button type="submit">Submit Evaluation</button>
+    </form>
+    <a class="back-link" href="/traineeship-committee/evaluate-final">Back</a>
+</div>
+</body>
+</html>
+

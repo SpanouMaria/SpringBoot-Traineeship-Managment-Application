@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Positions</title>
+	<style>
+	        body { background: #f7f7f7; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0;}
+	        .container { max-width: 600px; margin: 60px auto; background: white; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 40px 30px 30px 30px; text-align: center; }
+	        h2 { margin-bottom: 30px; color: #2b364b; font-size: 2em; }
+	        a { display: block; margin: 16px 0; color: #3a86ff; text-decoration: none; font-weight: 500; font-size: 1.13em; transition: color 0.18s; }
+	        a:hover { color: #26499d; }
+	        table { width: 100%; margin: 0 auto 10px auto; border-collapse: collapse; }
+	        th, td { padding: 9px 6px; border-bottom: 1px solid #eee; }
+	        th { background: #f5f7fa; }
+	    </style>
+</head>
+<body>
+<div class="container">
+    <h2>My Announced Positions</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Period</th>
+        </tr>
+		<tr th:each="pos : ${positions}">
+		    <td th:text="${pos.title}">Title</td>
+		    <td th:text="${pos.status}">Status</td>
+			<td th:text="${pos.fromDate} + ' - ' + ${pos.toDate}"></td>
+		</tr>
+    </table>
+    <a href="/company/portal-home">Back</a>
+</div>
+</body>
+</html>

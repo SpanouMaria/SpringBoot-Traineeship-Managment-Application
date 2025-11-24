@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Evaluations Overview</title>
+    <style>
+        body { background: #f7f7f7; font-family: 'Segoe UI', Arial, sans-serif; }
+        .container { max-width: 900px; margin: 40px auto; background: white; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+        th, td { border: 1px solid #e2e2e2; padding: 10px 8px; text-align: left; }
+        th { background: #f0f4fa; font-weight: 600; }
+        .badge { background: #3a86ff; color: #fff; border-radius: 8px; padding: 2px 8px; font-size: 0.93em; }
+        ul { margin: 6px 0 0 16px; padding: 0; }
+        li { font-size: 0.99em; margin-bottom: 3px; }
+        a { color: #3a86ff; text-decoration: none; font-weight: 500; }
+        a:hover { color: #26499d; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Evaluations Overview</h2>
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>Position</th>
+            <th>Company</th>
+            <th>Evaluations</th>
+        </tr>
+        <tr th:each="pos : ${evaluatedPositions}">
+            <td th:text="${pos.assignedStudent != null ? pos.assignedStudent.studentName : '—'}">Student</td>
+            <td th:text="${pos.title}">Position</td>
+            <td th:text="${pos.company != null ? pos.company.companyName : '—'}">Company</td>
+            <td>
+                <span th:if="${#lists.isEmpty(pos.evaluations)}">—</span>
+                <ul th:if="${!#lists.isEmpty(pos.evaluations)}">
+                    <li th:each="ev : ${pos.evaluations}">
+                        <span class="badge" th:text="${ev.evaluatorRole}">Evaluator</span>
+                        <span th:text="${ev.summary}">Summary</span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <a href="/traineeship-committee/portal-home">Back</a>
+</div>
+</body>
+</html>

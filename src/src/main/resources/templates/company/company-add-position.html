@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Traineeship Position</title>
+	<style>
+		body {
+		    background: linear-gradient(135deg, #e9ecef 0%, #f7f7f7 100%);
+		    font-family: 'Segoe UI', Arial, sans-serif;
+		    margin: 0;
+		    padding: 0;
+		}
+
+		.container {
+		    max-width: 700px;
+		    margin: 40px auto;
+		    background: white;
+		    border-radius: 18px;
+		    box-shadow: 0 4px 32px rgba(58, 134, 255, 0.10), 0 1.5px 6px rgba(44, 62, 80, 0.05);
+		    padding: 42px 36px 34px 36px;
+		    transition: box-shadow 0.2s;
+		}
+
+		.container:hover {
+		    box-shadow: 0 8px 40px rgba(58, 134, 255, 0.13), 0 2.5px 14px rgba(44, 62, 80, 0.07);
+		}
+
+		h2 {
+		    color: #2b364b;
+		    font-size: 2.3em;
+		    margin-bottom: 30px;
+		    letter-spacing: 1px;
+		    text-align: center;
+		}
+
+		label {
+		    display: block;
+		    margin-top: 18px;
+		    font-weight: bold;
+		    color: #3a86ff;
+		    letter-spacing: 0.5px;
+		    margin-bottom: 7px;
+		}
+
+		input[type="text"],
+		textarea,
+		select {
+		    width: 100%;
+		    padding: 10px 12px;
+		    margin-top: 4px;
+		    border-radius: 8px;
+		    border: 1px solid #d0d4da;
+		    background: #f6f8fa;
+		    font-size: 1.08em;
+		    box-sizing: border-box;
+		    transition: border 0.18s, background 0.18s;
+		}
+
+		input[type="text"]:focus,
+		textarea:focus,
+		select:focus {
+		    border: 1.5px solid #3a86ff;
+		    background: #eef4ff;
+		    outline: none;
+		}
+
+		button {
+		    margin-top: 26px;
+		    background: linear-gradient(90deg, #3a86ff 0%, #4cc9f0 100%);
+		    color: white;
+		    border: none;
+		    border-radius: 7px;
+		    padding: 12px 32px;
+		    cursor: pointer;
+		    font-weight: 600;
+		    font-size: 1.07em;
+		    box-shadow: 0 2px 8px rgba(58,134,255,0.08);
+		    transition: background 0.18s, box-shadow 0.2s;
+		}
+
+		button:hover {
+		    background: linear-gradient(90deg, #26499d 0%, #3a86ff 100%);
+		    box-shadow: 0 6px 20px rgba(58,134,255,0.16);
+		}
+
+		a {
+		    color: #3a86ff;
+		    text-decoration: none;
+		    transition: color 0.15s;
+		    font-weight: 500;
+		}
+
+		a:hover {
+		    color: #26499d;
+		    text-decoration: underline;
+		}
+	    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Add New Traineeship Position</h1>
+
+<form th:action="@{/company/add-position}" th:object="${position}" method="post">
+    <label>Title:</label>
+    <input type="text" th:field="*{title}" required/><br/>
+
+    <label>Description:</label>
+    <textarea th:field="*{description}" required></textarea><br/>
+
+    <label>Skills:</label>
+    <input type="text" th:field="*{skills}" required/><br/>
+
+    <label>Topics:</label>
+    <input type="text" th:field="*{topics}" required/><br/>
+
+    <label>From Date:</label>
+    <input type="date" th:field="*{fromDate}" required/><br/>
+
+    <label>To Date:</label>
+    <input type="date" th:field="*{toDate}" required/><br/>
+
+    <button type="submit">Create Position</button>
+</form>
+
+<a th:href="@{/company/portal-home}">Back to Positions</a>
+</body>
+</html>

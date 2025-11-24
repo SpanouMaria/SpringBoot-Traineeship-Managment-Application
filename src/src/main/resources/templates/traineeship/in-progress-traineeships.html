@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>In-Progress Traineeships</title>
+</head>
+<body>
+<h1>In-Progress Traineeships</h1>
+<table>
+    <thead>
+        <tr><th>Company</th><th>Position</th><th>Student</th></tr>
+    </thead>
+    <tbody>
+        <tr th:each="t : ${traineeships}">
+            <td th:text="${t.company.name}">Company</td>
+            <td th:text="${t.title}">Position</td>
+            <td th:text="${t.student.firstName + ' ' + t.student.lastName}">Student</td>
+        </tr>
+    </tbody>
+</table>
+<a th:href="@{/}">← Back to Portal Home</a>
+</body>
+</html>

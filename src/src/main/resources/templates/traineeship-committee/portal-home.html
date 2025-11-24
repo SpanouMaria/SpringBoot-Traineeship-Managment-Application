@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Committee Portal</title>
+	<style>
+	        body {
+	            background: #f7f7f7;
+	            font-family: 'Segoe UI', Arial, sans-serif;
+	            margin: 0;
+	            padding: 0;
+	        }
+	        .container {
+	            max-width: 400px;
+	            margin: 60px auto;
+	            background: white;
+	            border-radius: 10px;
+	            box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+	            padding: 40px 30px 30px 30px;
+	            text-align: center;
+	        }
+	        h2 {
+	            margin-bottom: 30px;
+	            color: #2b364b;
+	            font-size: 2em;
+	        }
+	        a {
+	            display: block;
+	            margin: 16px 0;
+	            color: #3a86ff;
+	            text-decoration: none;
+	            font-weight: 500;
+	            font-size: 1.13em;
+	            transition: color 0.18s;
+	        }
+	        a:hover {
+	            color: #26499d;
+	        }
+	    </style>
+</head>
+<body>
+<div class="container">
+    <h2 th:if="${committee != null}">Welcome <span th:text="${committee.name}">Committee Member</span>!</h2>
+    <h2 th:if="${committee == null}">Welcome Committee Member!</h2>
+    <a href="/traineeship-committee/view-applications">View Applications</a>
+    <a href="/traineeship-committee/assign-positions">Assign Positions</a>
+    <a href="/traineeship-committee/assign-supervisors">Assign Supervisors</a>
+    <a href="/traineeship-committee/in-progress">In Progress</a>
+    <a href="/traineeship-committee/evaluate-final">Evaluate Final Traineeships</a>
+	<form th:action="@{/logout}" method="post">
+		<button type="submit" style="background: #e44e4e; color: white; border: none; border-radius: 5px; padding: 8px 16px; font-weight: bold; cursor: pointer;">
+			            Log-out
+			        </button>
+	    </form>
+</div>
+</body>
+</html>

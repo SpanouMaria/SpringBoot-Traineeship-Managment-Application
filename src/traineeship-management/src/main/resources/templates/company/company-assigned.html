@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assigned Traineeships</title>
+	<style>
+	        body {
+	            background: #f7f7f7;
+	            font-family: 'Segoe UI', Arial, sans-serif;
+	            margin: 0;
+	            padding: 0;
+	        }
+	        .container {
+	            max-width: 700px;
+	            margin: 40px auto;
+	            background: white;
+	            border-radius: 10px;
+	            box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+	            padding: 30px;
+	        }
+	        h2 {
+	            color: #2b364b;
+	        }
+	        table {
+	            width: 100%;
+	            border-collapse: collapse;
+	            margin-top: 24px;
+	        }
+	        th, td {
+	            border: 1px solid #e2e2e2;
+	            padding: 12px 8px;
+	            text-align: left;
+	        }
+	        th {
+	            background: #f0f4fa;
+	            font-weight: 600;
+	        }
+	        a {
+	            color: #3a86ff;
+	            text-decoration: none;
+	            font-weight: 500;
+	        }
+	        a:hover {
+	            color: #26499d;
+	        }
+	    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Assigned Traineeships</h2>
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>Position</th>
+            <th>Start - End</th>
+			<th>Action</th>
+        </tr>
+        <tr th:each="assignment : ${assignments}">
+            <td th:text="${assignment.assignedStudent != null ? assignment.assignedStudent.studentName : '-'}">Student Name</td>
+            <td th:text="${assignment.title}">Position</td>
+            <td th:text="${assignment.fromDate + ' - ' + assignment.toDate}">2025-06-01 - 2025-09-01</td>
+			<td th:if="${assignment.id != null}">
+				  <a th:href="@{/company/evaluate/{id}(id=${assignment.id})}">Evaluate</a>
+           </td>
+		</tr>
+    </table>
+    <a href="/company/portal-home">Back</a>
+</div>
+</body>
+</html>

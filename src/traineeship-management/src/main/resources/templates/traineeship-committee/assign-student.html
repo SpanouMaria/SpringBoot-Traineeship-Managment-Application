@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assign Student</title>
+    <style>
+        body { background: #f7f7f7; font-family: 'Segoe UI', Arial, sans-serif; }
+        .container { max-width: 450px; margin: 60px auto; background: white; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 40px 30px; text-align: center; }
+        select, button { font-size: 1.13em; margin: 14px 0; padding: 6px; }
+        .back-link { margin-top: 20px; display: block; color: #3a86ff; text-decoration: none; font-weight: 500; }
+        .back-link:hover { color: #26499d; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 th:text="'Assign to: ' + ${position.title}">Assign to:</h2>
+    <form th:action="@{/traineeship-committee/assign-position}" method="post">
+        <input type="hidden" name="positionId" th:value="${position.id}" />
+        <label for="studentId">Choose Student:</label>
+        <select name="studentId" id="studentId" required>
+            <option th:each="student : ${students}" 
+                    th:value="${student.username}"
+                    th:text="${student.studentName}">Student Name</option>
+        </select>
+        <br>
+        <button type="submit">Assign</button>
+    </form>
+    <a href="/traineeship-committee/assign-positions" class="back-link">Cancel</a>
+</div>
+</body>
+</html>
